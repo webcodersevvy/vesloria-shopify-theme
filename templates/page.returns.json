@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "main": {
+      "type": "policy-editorial",
+      "blocks": {
+        "c1": {
+          "type": "clause",
+          "settings": {
+            "title": "01. Unopened & Sealed Vessels",
+            "body": "<p>Unopened formulations in their original sealed Travertine outer cartons may be returned within the applicable statutory return window for your jurisdiction.</p>"
+          }
+        },
+        "c2": {
+          "type": "clause",
+          "settings": {
+            "title": "02. Hygiene Standards for Opened Cosmetics",
+            "body": "<p>For client safety and cosmetic hygiene compliance, opened or unsealed vessels cannot be restocked unless a formulation arrived damaged, defective, or incorrect.</p>"
+          }
+        },
+        "c3": {
+          "type": "clause",
+          "settings": {
+            "title": "03. Initiating a Return",
+            "body": "<p>Contact Client Care with your order reference number to receive return authorisation and protective return-packing guidance.</p>"
+          }
+        },
+        "c4": {
+          "type": "clause",
+          "settings": {
+            "title": "04. Statutory Consumer Rights",
+            "body": "<p>Final jurisdiction-specific return periods (including UK, EU, US, and Australian statutory withdrawal terms) are confirmed prior to regional commercial launch.</p>"
+          }
+        }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
+      "settings": {
+        "eyebrow": "CLIENT CARE  ·  POLICY FRAMEWORK",
+        "heading": "RETURNS & REFUNDS",
+        "intro": "We want every VESLORIA formulation to be chosen with clarity and confidence. Please review our cosmetic hygiene return framework below.",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

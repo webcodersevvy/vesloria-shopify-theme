@@ -1,0 +1,42 @@
+<div {{ block.shopify_attributes }}>
+  {% render 'vesloria-button',
+    label: block.settings.label,
+    url: block.settings.url,
+    style: block.settings.style
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "Vesloria Button",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button label",
+      "default": "EXPLORE THE CORE RITUAL"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Link destination"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Button variant",
+      "options": [
+        { "value": "primary", "label": "Primary (Mineral Ink)" },
+        { "value": "light", "label": "Light (Pure White)" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "primary"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vesloria Button"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,110 @@
+{
+  "sections": {
+    "main": {
+      "type": "policy-editorial",
+      "blocks": {
+        "s1": {
+          "type": "summary_item",
+          "settings": {
+            "label": "BRAND STATUS",
+            "value": "Fictional Concept — Not a Real Commercial Entity"
+          }
+        },
+        "s2": {
+          "type": "summary_item",
+          "settings": {
+            "label": "CONTENT & MEDIA",
+            "value": "AI-Generated Imagery, Video & Curated Stock"
+          }
+        },
+        "s3": {
+          "type": "summary_item",
+          "settings": {
+            "label": "INTENDED USAGE",
+            "value": "Personal Portfolio & Showcase Only"
+          }
+        },
+        "c1": {
+          "type": "clause",
+          "settings": {
+            "title": "01. Fictional Brand & Non-Commercial Status",
+            "body": "<p>VESLORIA—along with its collections (The Core Ritual and Reserve Formulations), product titles, pricing, SKU codes, batch limits, client profiles, and sample order records—is an entirely fictional concept created for creative and technical exploration. VESLORIA does not exist as a real-world company, registered trademark, or retail store. Any resemblance to existing brands, products, or individuals is purely coincidental.</p>"
+          }
+        },
+        "c2": {
+          "type": "clause",
+          "settings": {
+            "title": "02. Portfolio & Showcase Usage Only",
+            "body": "<p>This website, its visual identity, Brand Toolkit, and interactive storefront prototypes are published strictly for personal portfolio showcase and professional capability demonstration by Sewak Singh (Millé Studio). No portion of this project is intended for commercial sales, public retail distribution, advertising, or commercial licensing.</p>"
+          }
+        },
+        "c3": {
+          "type": "clause",
+          "settings": {
+            "title": "03. AI-Generated & AI-Assisted Content Disclosure",
+            "body": "<p>This project relies extensively on Artificial Intelligence (AI) tools for creative direction and asset production. Visuals—including product renders, editorial imagery, macro textures, video assets, and campaign concepts—as well as brand strategy, copywriting, and sample product metadata may be generated or assisted by AI systems. All AI-sourced and AI-generated content is used strictly for conceptual, non-commercial portfolio illustration.</p>"
+          }
+        },
+        "c4": {
+          "type": "clause",
+          "settings": {
+            "title": "04. Third-Party Stock Media & Attribution",
+            "body": "<p>Where curated third-party stock photography, typography, or placeholder media appear alongside AI-generated visuals, all rights remain with their respective creators and platforms under their applicable open or standard licenses. No copyright or ownership is claimed over third-party stock assets, which are included solely to complete realistic portfolio mockups.</p>"
+          }
+        },
+        "c5": {
+          "type": "clause",
+          "settings": {
+            "title": "05. No Real Transactions, Checkout, or Payment Processing",
+            "body": "<p>All e-commerce interfaces on this site—including Add to Bag, Shopping Bag, Checkout, Payment & Billing, Sign In, Account, and Order History pages—are functional UI/UX demonstrations only. No real orders are processed, no funds are charged, and no products will be fulfilled. Visitors must not enter genuine payment card details, banking credentials, or sensitive personal data into any demonstration form.</p>"
+          }
+        },
+        "c6": {
+          "type": "clause",
+          "settings": {
+            "title": "06. Fictional Formulations — Not Cosmetic or Medical Advice",
+            "body": "<p>All ingredient narratives, active complexes, target pH values, PAO markers, and ritual layering instructions are fictional creative copy written to simulate a luxury skincare house. No formulation shown has been physically compounded, stability-tested, dermatologically evaluated, or notified with cosmetic regulators (such as US FDA/MoCRA, EU CPNP, or UK SCPN). Nothing on this site constitutes skincare, cosmetic safety, or medical advice.</p>"
+          }
+        },
+        "c7": {
+          "type": "clause",
+          "settings": {
+            "title": "07. Intellectual Property, Liability & Removal Requests",
+            "body": "<p>The original website layout, design system, and interaction architecture are presented as portfolio work by Sewak Singh (Millé Studio). This project is provided “as is” for visual and technical demonstration without warranties of any kind. If you are a copyright, trademark, or likeness rights holder and believe any AI-generated or third-party asset used here inadvertently conflicts with your rights, please reach out via the Contact page for immediate review and prompt removal.</p>"
+          }
+        },
+        "l1": {
+          "type": "related_link",
+          "settings": {
+            "label": "TERMS & CONDITIONS →",
+            "url": "/pages/terms"
+          }
+        },
+        "l2": {
+          "type": "related_link",
+          "settings": {
+            "label": "ABOUT THIS CONCEPT →",
+            "url": "/pages/about"
+          }
+        },
+        "l3": {
+          "type": "related_link",
+          "settings": {
+            "label": "CONTACT / REMOVAL REQUESTS →",
+            "url": "/pages/contact"
+          }
+        }
+      },
+      "block_order": ["s1", "s2", "s3", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "l1", "l2", "l3"],
+      "settings": {
+        "eyebrow": "CONCEPT PROJECT  ·  PORTFOLIO & AI CONTENT NOTICE",
+        "heading": "PROJECT & AI DISCLAIMER",
+        "intro": "VESLORIA is a fictional, non-commercial luxury skincare concept brand created strictly for design, art direction, and e-commerce engineering portfolio presentation by Sewak Singh (Millé Studio). No physical products are manufactured, sold, or shipped through this website.",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

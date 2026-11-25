@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "show_hero_image": false,
+        "show_filter_bar": true,
+        "all_heading": "ALL FORMULATIONS.",
+        "all_subcopy": "Filter across our four daily Core Ritual staples and two numbered Reserve nocturnal treatments, or search by formulation name.",
+        "products_per_page": 12,
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "main": {
+      "type": "ritual-cadence",
+      "blocks": {
+        "am": {
+          "type": "cadence",
+          "settings": {
+            "dark_theme": false,
+            "eyebrow": "01 / MORNING (AM)",
+            "title": "Daily Protection & Balance",
+            "step_1_label": "STEP 01 · CLEANSE",
+            "step_1_value": "Sola Milk Cleanser (1–2 pumps)",
+            "step_2_label": "STEP 02 · REPLENISH",
+            "step_2_value": "Vela Essence Serum (3–4 drops)",
+            "step_3_label": "STEP 03 · FORTIFY",
+            "step_3_value": "Cera Barrier Cream (pearl amount)",
+            "step_4_label": "STEP 04 · PROTECT",
+            "step_4_value": "Broad-Spectrum SPF (your own)"
+          }
+        },
+        "pm_daily": {
+          "type": "cadence",
+          "settings": {
+            "dark_theme": false,
+            "eyebrow": "02 / EVENING — DAILY (PM)",
+            "title": "Overnight Barrier Seal",
+            "step_1_label": "STEP 01 · CLEANSE",
+            "step_1_value": "Sola Milk Cleanser (dissolves SPF)",
+            "step_2_label": "STEP 02 · REPLENISH",
+            "step_2_value": "Vela Essence Serum (damp skin)",
+            "step_3_label": "STEP 03 · FORTIFY",
+            "step_3_value": "Cera Barrier Cream (lamellar seal)",
+            "step_4_label": "STEP 04 · SEAL",
+            "step_4_value": "Olea Lipid Elixir (2–3 drops)"
+          }
+        },
+        "pm_reserve": {
+          "type": "cadence",
+          "settings": {
+            "dark_theme": true,
+            "eyebrow": "03 / EVENING — RESERVE (PM)",
+            "title": "Concentrated Nocturnal Recovery",
+            "step_1_label": "STEP 01 · CLEANSE",
+            "step_1_value": "Sola Milk Cleanser",
+            "step_2_label": "STEP 02 · REPLENISH",
+            "step_2_value": "Vela Essence Serum",
+            "step_3_label": "RESERVE · RENEW",
+            "step_3_value": "No. 01 Nocturnal Concentrate (3–5×/wk)",
+            "step_4_label": "RESERVE · RECOVER",
+            "step_4_value": "No. 02 Restorative Balm (final veil)"
+          }
+        },
+        "v30": {
+          "type": "volume",
+          "settings": {
+            "fl_oz": "1.0 FL. OZ.",
+            "ml": "30 ML",
+            "duration": "Approx. 8–10 weeks",
+            "applies_to": "Vela Serum · Olea Elixir · No. 01 Concentrate"
+          }
+        },
+        "v50": {
+          "type": "volume",
+          "settings": {
+            "fl_oz": "1.7 FL. OZ.",
+            "ml": "50 ML",
+            "duration": "Approx. 10–14 weeks",
+            "applies_to": "Vela Serum · Cera Cream & Refill · No. 02 Balm"
+          }
+        },
+        "v100": {
+          "type": "volume",
+          "settings": {
+            "fl_oz": "3.4 FL. OZ.",
+            "ml": "100 ML",
+            "duration": "Approx. 8–10 weeks",
+            "applies_to": "Sola Milk Cleanser (twice-daily cleanse)"
+          }
+        },
+        "v200": {
+          "type": "volume",
+          "settings": {
+            "fl_oz": "6.7 FL. OZ.",
+            "ml": "200 ML",
+            "duration": "Approx. 16–20 weeks",
+            "applies_to": "Sola Milk Cleanser (extended vanity vessel)"
+          }
+        }
+      },
+      "block_order": ["am", "pm_daily", "pm_reserve", "v30", "v50", "v100", "v200"],
+      "settings": {
+        "eyebrow": "RITUAL & LAYERING GUIDE",
+        "heading": "THE DAILY CADENCE.",
+        "intro": "Every VESLORIA formulation is calibrated to layer cleanly from lightest aqueous fluid to richest lipid seal — without pilling, heaviness, or active conflict.",
+        "volume_eyebrow": "VOLUME & USAGE LONGEVITY",
+        "volume_heading": "Vessel Volume Reference",
+        "cta_label": "EXPLORE THE CORE RITUAL",
+        "cta_url": "/collections/the-core-ritual",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

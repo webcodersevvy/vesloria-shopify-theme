@@ -1,0 +1,36 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}{% if section.settings.show_top_border %} vsl-section--border-top{% endif %}">
+  <div class="vsl-container">
+    <div class="vsl-blocks-stack">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Canvas (Blocks)",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": "Show top hairline rule",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Canvas (Blocks)"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,68 @@
+{%- comment -%}
+  VESLORIA Formulation Card
+  Matches Framer Formulation Card: Alabaster Vessel Frame + Mono Step/Batch + Boska Title + Price + Texture + Volume Summary
+  Metafields supported (optional, falls back gracefully to standard Shopify product properties):
+  - custom.step_or_batch (single_line_text_field)
+  - custom.texture (single_line_text_field)
+  - custom.volume_summary (single_line_text_field)
+{%- endcomment -%}
+{%- liquid
+  assign step_label = product.metafields.custom.step_or_batch.value | default: product.type | default: 'FORMULATION'
+  assign texture_label = product.metafields.custom.texture.value | default: product.metafields.descriptors.subtitle.value
+  assign volume_label = product.metafields.custom.volume_summary.value
+  if volume_label == blank and product.variants.size > 0
+    assign vol_parts = ''
+    for v in product.variants limit: 2
+      unless v.title == 'Default Title'
+        if vol_parts != ''
+          assign vol_parts = vol_parts | append: ' · '
+        endif
+        assign vol_parts = vol_parts | append: v.title
+      endunless
+    endfor
+    assign volume_label = vol_parts
+  endif
+-%}
+
+<article
+  class="vsl-card"
+  data-product-card
+  data-title="{{ product.title | downcase | escape }}"
+  data-collections="{% for c in product.collections %}{{ c.handle }}{% unless forloop.last %},{% endunless %}{% endfor %}"
+>
+  <a href="{{ product.url }}" class="vsl-card__link" aria-label="{{ product.title | escape }}">
+    <div class="vsl-card__media">
+      {%- if product.featured_image != blank -%}
+        {{
+          product.featured_image
+          | image_url: width: 1200
+          | image_tag:
+            class: 'vsl-card__img',
+            widths: '400, 650, 900, 1200',
+            sizes: '(min-width: 810px) 46vw, 94vw',
+            loading: loading | default: 'lazy',
+            alt: product.featured_image.alt | default: product.title | escape
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'vsl-card__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    <div class="vsl-card__meta">
+      <p class="vsl-mono-xs vsl-text-eyebrow">{{ step_label }}</p>
+
+      <div class="vsl-card__title-row">
+        <h3 class="vsl-h3 vsl-card__title">{{ product.title }}</h3>
+        <span class="vsl-card__price">{{ product.price | money_with_currency }}</span>
+      </div>
+
+      {%- if texture_label != blank -%}
+        <p class="vsl-body-sm vsl-text-muted">{{ texture_label }}</p>
+      {%- endif -%}
+
+      {%- if volume_label != blank -%}
+        <p class="vsl-mono-xs vsl-text-eyebrow">{{ volume_label }}</p>
+      {%- endif -%}
+    </div>
+  </a>
+</article>

@@ -1,0 +1,115 @@
+{%- liquid
+  assign target_collection = section.settings.collection
+  assign limit_count = section.settings.products_to_show | default: 4
+-%}
+
+<section class="vsl-section color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <div class="vsl-showcase__header">
+      <div class="vsl-showcase__titles">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="vsl-h1">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="vsl-body-sm vsl-text-muted">{{ section.settings.description | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.link_label != blank -%}
+        {%- assign cta_href = section.settings.link_url | default: target_collection.url | default: routes.all_products_collection_url -%}
+        <a href="{{ cta_href }}" class="vsl-editorial-link">
+          {{ section.settings.link_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if target_collection != blank and target_collection.products_count > 0 -%}
+      <div class="vsl-grid-2">
+        {%- for product in target_collection.products limit: limit_count -%}
+          {% render 'product-card', product: product, loading: 'lazy' %}
+        {%- endfor -%}
+      </div>
+    {%- elsif collections.all.products_count > 0 -%}
+      <div class="vsl-grid-2">
+        {%- for product in collections.all.products limit: limit_count -%}
+          {% render 'product-card', product: product, loading: 'lazy' %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="vsl-empty-box">
+        <p class="vsl-body-sm vsl-text-muted">{{ section.settings.empty_text | escape }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formulation Showcase",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 2,
+      "default": 4,
+      "label": "Formulations to display"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "01 / THE CORE RITUAL  ·  VSL-CO-001"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "EQUILIBRIUM, DAILY."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Four foundational formulations designed to cleanse, replenish, fortify, and seal the skin barrier in quiet sequence."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Right link label",
+      "default": "VIEW THE CORE RITUAL →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Right link URL"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty state copy",
+      "default": "No formulations currently available."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Formulation Showcase"
+    }
+  ]
+}
+{% endschema %}

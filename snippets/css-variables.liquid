@@ -1,0 +1,58 @@
+{%- liquid
+  if settings.use_shopify_font_picker
+    assign display_font_family = settings.type_header_font.family | append: ', ' | append: settings.type_header_font.fallback_families
+    assign body_font_family = settings.type_body_font.family | append: ', ' | append: settings.type_body_font.fallback_families
+  else
+    assign display_font_family = "'Boska', Georgia, serif"
+    assign body_font_family = "'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  endif
+-%}
+
+{%- if settings.use_shopify_font_picker -%}
+  {% style %}
+    {{ settings.type_header_font | font_face: font_display: 'swap' }}
+    {{ settings.type_body_font | font_face: font_display: 'swap' }}
+  {% endstyle %}
+{%- endif -%}
+
+{% style %}
+  :root {
+    --font-display: {{ display_font_family }};
+    --font-body: {{ body_font_family }};
+    --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    --color-pure-white: #FFFFFF;
+    --color-mineral-ink: #161616;
+    --color-mineral-ink-hover: #2E2D2B;
+    --color-warm-slate: #454340;
+    --color-alabaster: #F6F5F2;
+    --color-mineral-mist: #EAE8E3;
+    --color-travertine: #C4BCB1;
+    --color-botanical-umber: #6E655D;
+    --color-deep-olive-clay: #3D423A;
+    --color-olive-border: #5B6157;
+    --color-error: #9E2F2F;
+    --color-success: #2E5E42;
+
+    --container-max: {{ settings.page_width | default: 1344 }}px;
+    --gutter: clamp(20px, 3.5vw, 48px);
+    --transition-ease: cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  {%- for scheme in settings.color_schemes -%}
+    .color-{{ scheme.id }} {
+      --scheme-bg: {{ scheme.settings.background }};
+      --scheme-bg-gradient: {{ scheme.settings.background_gradient | default: scheme.settings.background }};
+      --scheme-surface: {{ scheme.settings.surface }};
+      --scheme-text: {{ scheme.settings.text }};
+      --scheme-text-muted: {{ scheme.settings.text_muted }};
+      --scheme-text-eyebrow: {{ scheme.settings.text_eyebrow }};
+      --scheme-border: {{ scheme.settings.border }};
+      --scheme-btn-bg: {{ scheme.settings.button }};
+      --scheme-btn-text: {{ scheme.settings.button_label }};
+      --scheme-btn-outline-text: {{ scheme.settings.secondary_button_label }};
+      background-color: var(--scheme-bg);
+      color: var(--scheme-text);
+    }
+  {%- endfor -%}
+{% endstyle %}

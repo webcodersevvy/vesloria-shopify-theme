@@ -1,0 +1,47 @@
+<div class="vsl-accordion" {{ block.shopify_attributes }}>
+  <button
+    type="button"
+    class="vsl-accordion__trigger"
+    data-accordion-trigger
+    aria-expanded="{{ block.settings.open_by_default }}"
+  >
+    <span class="vsl-ui-label">{{ block.settings.title | escape }}</span>
+    <span class="vsl-accordion__icon" aria-hidden="true">
+      {%- if block.settings.open_by_default -%}−{%- else -%}+{%- endif -%}
+    </span>
+  </button>
+  <div class="vsl-accordion__panel" data-accordion-panel {% unless block.settings.open_by_default %}hidden{% endunless %}>
+    {{ block.settings.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Accordion Item",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FORMULATION NOTES"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Calibrated for daily skin barrier resilience.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "Open by default",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion Item"
+    }
+  ]
+}
+{% endschema %}

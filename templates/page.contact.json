@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-contact",
+      "blocks": {
+        "d1": {
+          "type": "directory_item",
+          "settings": {
+            "heading": "CLIENT CARE & RITUAL ENQUIRIES",
+            "body": "For formulation compatibility, layering sequence questions, or refill vessel compatibility: care@vesloria.com"
+          }
+        },
+        "d2": {
+          "type": "directory_item",
+          "settings": {
+            "heading": "ORDER & TRANSIT ASSISTANCE",
+            "body": "For questions regarding an active dispatch or fragile glass vessel condition upon arrival, please include your order reference number."
+          }
+        },
+        "d3": {
+          "type": "directory_item",
+          "settings": {
+            "heading": "PRESS & EDITORIAL",
+            "body": "For high-resolution vessel imagery, formulation dossiers, and editorial loans: press@vesloria.com"
+          }
+        }
+      },
+      "block_order": ["d1", "d2", "d3"],
+      "settings": {
+        "eyebrow": "CLIENT CARE",
+        "heading": "WE’RE HERE TO ASSIST.",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

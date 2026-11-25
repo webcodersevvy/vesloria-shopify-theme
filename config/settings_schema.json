@@ -1,0 +1,190 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "VESLORIA",
+    "theme_version": "1.0.0",
+    "theme_author": "Millé Studio",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://shopify.dev/docs"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "color",
+            "id": "background",
+            "label": "Background",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "Background gradient"
+          },
+          {
+            "type": "color",
+            "id": "surface",
+            "label": "Surface",
+            "default": "#F6F5F2"
+          },
+          {
+            "type": "color",
+            "id": "text",
+            "label": "Text",
+            "default": "#161616"
+          },
+          {
+            "type": "color",
+            "id": "text_muted",
+            "label": "Muted text",
+            "default": "#454340"
+          },
+          {
+            "type": "color",
+            "id": "text_eyebrow",
+            "label": "Technical / Eyebrow text",
+            "default": "#6E655D"
+          },
+          {
+            "type": "color",
+            "id": "border",
+            "label": "Hairline border",
+            "default": "#EAE8E3"
+          },
+          {
+            "type": "color",
+            "id": "button",
+            "label": "Primary button",
+            "default": "#161616"
+          },
+          {
+            "type": "color",
+            "id": "button_label",
+            "label": "Primary button label",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button_label",
+            "label": "Outline button label",
+            "default": "#161616"
+          }
+        ],
+        "role": {
+          "text": "text",
+          "background": {
+            "solid": "background",
+            "gradient": "background_gradient"
+          },
+          "links": "text",
+          "icons": "text",
+          "primary_button": "button",
+          "on_primary_button": "button_label",
+          "primary_button_border": "button",
+          "secondary_button": "background",
+          "on_secondary_button": "secondary_button_label",
+          "secondary_button_border": "border"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Typography & Fonts",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "VESLORIA ships with self-hosted Boska (display serif), Switzer (body & UI), and Geist Mono (technical metadata). Enable Shopify Font Picker overrides below only if you wish to substitute system or licensed Shopify fonts."
+      },
+      {
+        "type": "checkbox",
+        "id": "use_shopify_font_picker",
+        "label": "Override with Shopify font picker",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "serif",
+        "label": "Display & Heading font override"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "default": "sans_serif",
+        "label": "Body font override"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1080,
+        "max": 1440,
+        "step": 12,
+        "unit": "px",
+        "label": "Maximum container width",
+        "default": 1344
+      }
+    ]
+  },
+  {
+    "name": "Shopping Bag",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Bag interaction",
+        "options": [
+          { "value": "drawer", "label": "Slide-over bag drawer" },
+          { "value": "page", "label": "Dedicated bag page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "text",
+        "id": "packaging_note_title",
+        "label": "Packaging note heading",
+        "default": "COMPLIMENTARY ARCHITECTURAL PACKAGING"
+      },
+      {
+        "type": "textarea",
+        "id": "packaging_note_body",
+        "label": "Packaging note body",
+        "default": "Every VESLORIA dispatch includes custom moulded-pulp vessel protection and our A6 cotton-blend Daily Cadence ritual card."
+      },
+      {
+        "type": "text",
+        "id": "trust_note",
+        "label": "Summary trust note",
+        "default": "Climate-controlled dispatch in recyclable moulded-pulp cradles. Encrypted PCI-DSS checkout."
+      }
+    ]
+  },
+  {
+    "name": "Favicon & Metadata",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image"
+      }
+    ]
+  },
+  {
+    "name": "Social Links",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram URL"
+      }
+    ]
+  }
+]

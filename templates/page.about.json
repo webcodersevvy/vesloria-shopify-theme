@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "hero": {
+      "type": "about-hero",
+      "settings": {
+        "eyebrow": "THE WORLD OF VESLORIA",
+        "heading": "A QUIETER APPROACH TO SKIN.",
+        "subcopy": "Formulations defined by barrier equilibrium, sensory precision, and architectural vessel permanence.",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "story": {
+      "type": "editorial-split-intro",
+      "settings": {
+        "eyebrow": "01 / THE MAISON",
+        "heading": "BARRIER, RESPECTED. RITUAL, REFINED.",
+        "body": "Our perspective begins with skin biology itself: its intercellular lipids, its hydration threshold, its need for consistent tolerance, and the sensory manner in which a formula settles beneath the fingertips.",
+        "secondary_body": "Rather than chasing aggressive resurfacing cycles or sprawling twelve-step shelves, we formulate through restraint. Four foundational vessels form The Core Ritual, complemented by Reserve Formulations released in numbered runs of 250 smoked olive-amber glass vessels.",
+        "link_label": "",
+        "show_top_border": true,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "ethos": {
+      "type": "editorial-macro-split",
+      "settings": {
+        "image_position": "left",
+        "eyebrow": "02 / FORMULATION ETHOS",
+        "heading": "BIOLOGY BEFORE SPECTACLE.",
+        "body": "Skin does not thrive on constant disruption. It responds to steady lipid support, tolerable concentrations, and unhurried daily consistency. Every VESLORIA formula starts with the stratum corneum — uniting ceramides, ectoin, centella, and cold-pressed botanical lipids with zero synthetic fragrance.",
+        "button_label": "",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "principles": {
+      "type": "about-principles",
+      "blocks": {
+        "p1": {
+          "type": "principle",
+          "settings": {
+            "number": "01",
+            "title": "Barrier Integrity Over Intensity",
+            "description": "Even active nocturnal treatments are lipid-buffered so skin strengthens through steady resilience rather than chronic inflammation."
+          }
+        },
+        "p2": {
+          "type": "principle",
+          "settings": {
+            "number": "02",
+            "title": "Synergy Over Single-Hero Percentages",
+            "description": "Balanced multi-pathway complexes deliver calm, repeatable comfort across changing climates and seasons."
+          }
+        },
+        "p3": {
+          "type": "principle",
+          "settings": {
+            "number": "03",
+            "title": "Texture as Daily Efficacy",
+            "description": "Viscosity, glide, clean absorption, and weighted frosted flint glass make daily stewardship effortless."
+          }
+        },
+        "p4": {
+          "type": "principle",
+          "settings": {
+            "number": "04",
+            "title": "Fragrance & Noise Restraint",
+            "description": "Zero synthetic perfumes or sensitising essential oils; only honest natural botanical notes and transparent INCI decks."
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"],
+      "settings": {
+        "eyebrow": "03 / FOUR FORMULATION PRINCIPLES",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "manifesto": {
+      "type": "maison-manifesto",
+      "settings": {
+        "eyebrow": "04 / THE VESLORIA PERSPECTIVE",
+        "heading": "FEWER FORMULATIONS. DEEPER EQUILIBRIUM.",
+        "body": "",
+        "link_label": "VIEW ALL COLLECTIONS",
+        "link_url": "/collections",
+        "cta_style": "button",
+        "show_top_border": false,
+        "boxed": true,
+        "color_scheme": "scheme-1",
+        "box_color_scheme": "scheme-2"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "story",
+    "ethos",
+    "principles",
+    "manifesto"
+  ]
+}

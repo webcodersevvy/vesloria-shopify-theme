@@ -1,0 +1,38 @@
+<div class="vsl-principle-item" {{ block.shopify_attributes }}>
+  {%- if block.settings.number != blank -%}
+    <p class="vsl-mono vsl-text-eyebrow">{{ block.settings.number | escape }}</p>
+  {%- endif -%}
+  <h3 class="vsl-h3">{{ block.settings.title | escape }}</h3>
+  <p class="vsl-body-sm vsl-text-muted">{{ block.settings.description | escape }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Pillar Card",
+  "settings": [
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Index number",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Barrier Integrity Over Intensity"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Even active nocturnal treatments are lipid-buffered so skin strengthens through steady resilience rather than chronic inflammation."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pillar Card"
+    }
+  ]
+}
+{% endschema %}

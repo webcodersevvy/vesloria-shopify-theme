@@ -1,0 +1,106 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <div class="vsl-page-intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="vsl-h1">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.subcopy != blank -%}
+        <p class="vsl-body-lg vsl-text-muted">{{ section.settings.subcopy | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="vsl-collections-stack">
+      {%- for collection in collections -%}
+        {%- unless collection.handle == 'all' -%}
+          {%- assign ref_label = collection.metafields.custom.reference.value | default: 'COLLECTION' -%}
+          {%- assign subtitle_label = collection.metafields.custom.subtitle.value -%}
+          <article class="vsl-collection-row">
+            <a href="{{ collection.url }}" class="vsl-collection-row__media" aria-label="{{ collection.title | escape }}">
+              {%- if collection.image != blank -%}
+                {{
+                  collection.image
+                  | image_url: width: 1800
+                  | image_tag:
+                    widths: '700, 1200, 1800',
+                    sizes: '(min-width: 901px) 92vw, 94vw',
+                    loading: 'lazy',
+                    alt: collection.image.alt | default: collection.title | escape
+                }}
+              {%- elsif collection.products.first.featured_image != blank -%}
+                {{
+                  collection.products.first.featured_image
+                  | image_url: width: 1800
+                  | image_tag:
+                    widths: '700, 1200, 1800',
+                    sizes: '(min-width: 901px) 92vw, 94vw',
+                    loading: 'lazy',
+                    alt: collection.title | escape
+                }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag }}
+              {%- endif -%}
+            </a>
+
+            <div class="vsl-collection-row__meta">
+              <div class="vsl-collection-row__left">
+                <p class="vsl-mono vsl-text-eyebrow">{{ ref_label | escape }}</p>
+                <h2 class="vsl-h1">{{ collection.title | escape }}</h2>
+                {%- if subtitle_label != blank -%}
+                  <p class="vsl-collection-row__subtitle">{{ subtitle_label | escape }}</p>
+                {%- endif -%}
+                {%- if collection.description != blank -%}
+                  <div class="vsl-body-sm vsl-text-muted">{{ collection.description }}</div>
+                {%- endif -%}
+              </div>
+
+              <div class="vsl-collection-row__right">
+                <p class="vsl-mono-xs vsl-text-eyebrow">
+                  {%- if collection.products_count < 10 -%}0{%- endif -%}{{ collection.products_count }} FORMULATIONS
+                </p>
+                <a href="{{ collection.url }}" class="vsl-editorial-link">EXPLORE THE COLLECTION →</a>
+              </div>
+            </div>
+          </article>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections Directory",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE VESLORIA COLLECTIONS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "TWO EXPRESSIONS OF EQUILIBRIUM."
+    },
+    {
+      "type": "textarea",
+      "id": "subcopy",
+      "label": "Subcopy",
+      "default": "Four daily barrier essentials housed in frosted flint glass, paired with two numbered nocturnal reserve formulations in UV-protective smoked olive glass."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Directory"
+    }
+  ]
+}
+{% endschema %}

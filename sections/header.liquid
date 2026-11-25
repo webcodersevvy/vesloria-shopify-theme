@@ -1,0 +1,160 @@
+<header class="vsl-header-wrap" role="banner">
+  <vsl-mobile-menu>
+    <div class="vsl-container">
+      <div class="vsl-header__row">
+        <div class="vsl-header__left">
+          <button
+            type="button"
+            class="vsl-header__menu-btn"
+            data-mobile-menu-toggle
+            data-open-label="{{ 'sections.header.menu' | t }}"
+            data-close-label="{{ 'sections.header.close' | t }}"
+            aria-expanded="false"
+            aria-controls="VesloriaMobileDrawer"
+          >
+            {{ 'sections.header.menu' | t }}
+          </button>
+
+          <nav class="vsl-header__desktop-links vsl-header__left" aria-label="Primary navigation">
+            {%- if section.settings.left_menu != blank -%}
+              {%- for link in section.settings.left_menu.links -%}
+                <a
+                  href="{{ link.url }}"
+                  class="vsl-nav-link"
+                  {% if link.current %}aria-current="page"{% endif %}
+                >{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="{{ routes.all_products_collection_url }}" class="vsl-nav-link">{{ 'sections.header.shop' | t }}</a>
+              <a href="{{ routes.collections_url }}" class="vsl-nav-link">{{ 'sections.header.collections' | t }}</a>
+              <a href="/pages/ritual-guide" class="vsl-nav-link">{{ 'sections.header.ritual_guide' | t }}</a>
+            {%- endif -%}
+          </nav>
+        </div>
+
+        <a href="{{ routes.root_url }}" class="vsl-wordmark" aria-label="{{ shop.name | escape }}">
+          {%- if section.settings.logo != blank -%}
+            {{
+              section.settings.logo
+              | image_url: width: 280
+              | image_tag:
+                widths: '140, 280',
+                sizes: '140px',
+                loading: 'eager',
+                alt: shop.name | escape
+            }}
+          {%- else -%}
+            {{ section.settings.wordmark | default: shop.name | escape }}
+          {%- endif -%}
+        </a>
+
+        <div class="vsl-header__right">
+          <nav class="vsl-header__desktop-links vsl-header__right" aria-label="Secondary navigation">
+            {%- if section.settings.right_menu != blank -%}
+              {%- for link in section.settings.right_menu.links -%}
+                <a
+                  href="{{ link.url }}"
+                  class="vsl-nav-link"
+                  {% if link.current %}aria-current="page"{% endif %}
+                >{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              <a href="/pages/about" class="vsl-nav-link">{{ 'sections.header.about' | t }}</a>
+              {%- if shop.customer_accounts_enabled -%}
+                <a href="{{ routes.account_url }}" class="vsl-nav-link">{{ 'sections.header.account' | t }}</a>
+              {%- endif -%}
+            {%- endif -%}
+          </nav>
+
+          {%- if section.settings.show_shopify_account_component and shop.customer_accounts_enabled -%}
+            <div class="vsl-header__account-wrap">
+              <shopify-account menu="customer-account-main-menu"></shopify-account>
+            </div>
+          {%- endif -%}
+
+          <a
+            href="{{ routes.cart_url }}"
+            class="vsl-header__bag-btn"
+            data-cart-open
+            aria-label="{{ 'general.accessibility.open_bag' | t }}"
+          >
+            <span>{{ 'sections.header.bag' | t }}</span>
+            <span data-cart-count>({{ cart.item_count }})</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="VesloriaMobileDrawer" class="vsl-mobile-drawer" data-mobile-drawer>
+      <nav class="vsl-mobile-drawer__list" aria-label="Mobile navigation">
+        {%- if section.settings.mobile_menu != blank -%}
+          {%- for link in section.settings.mobile_menu.links -%}
+            <a href="{{ link.url }}" class="vsl-mobile-drawer__link">{{ link.title | escape }}</a>
+            {%- for child in link.links -%}
+              <a href="{{ child.url }}" class="vsl-mobile-drawer__sublink">{{ child.title | escape }}</a>
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- else -%}
+          <a href="{{ routes.all_products_collection_url }}" class="vsl-mobile-drawer__link">SHOP ALL</a>
+          <a href="{{ routes.collections_url }}" class="vsl-mobile-drawer__link">COLLECTIONS</a>
+          <a href="{{ routes.collections_url }}/the-core-ritual" class="vsl-mobile-drawer__sublink">01 / THE CORE RITUAL</a>
+          <a href="{{ routes.collections_url }}/reserve-formulations" class="vsl-mobile-drawer__sublink">02 / RESERVE FORMULATIONS</a>
+          <a href="/pages/ritual-guide" class="vsl-mobile-drawer__link">RITUAL GUIDE</a>
+          <a href="/pages/about" class="vsl-mobile-drawer__link">ABOUT VESLORIA</a>
+          <a href="/pages/contact" class="vsl-mobile-drawer__link">CONTACT &amp; CLIENT CARE</a>
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{{ routes.account_url }}" class="vsl-mobile-drawer__link">CLIENT ACCOUNT</a>
+          {%- endif -%}
+        {%- endif -%}
+      </nav>
+    </div>
+  </vsl-mobile-menu>
+</header>
+
+{% schema %}
+{
+  "name": "Vesloria Navbar",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "wordmark",
+      "label": "Wordmark text",
+      "default": "VESLORIA"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Optional logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "left_menu",
+      "label": "Left navigation menu"
+    },
+    {
+      "type": "link_list",
+      "id": "right_menu",
+      "label": "Right navigation menu"
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "label": "Mobile drawer menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shopify_account_component",
+      "label": "Enable <shopify-account> web component",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vesloria Navbar"
+    }
+  ]
+}
+{% endschema %}

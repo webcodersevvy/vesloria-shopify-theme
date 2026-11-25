@@ -1,0 +1,71 @@
+<section class="vsl-section--compact color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <div style="display: flex; flex-direction: column; gap: 36px;">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      <div class="vsl-principles-grid">
+        {%- for block in section.blocks -%}
+          <div class="vsl-principle-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.number != blank -%}
+              <p class="vsl-mono vsl-text-eyebrow">{{ block.settings.number | escape }}</p>
+            {%- endif -%}
+            <h3 class="vsl-h3">{{ block.settings.title | escape }}</h3>
+            <p class="vsl-body-sm vsl-text-muted">{{ block.settings.description | escape }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formulation Principles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Section eyebrow",
+      "default": "03 / FOUR FORMULATION PRINCIPLES"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principle",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Barrier Integrity Over Intensity"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Formulation Principles"
+    }
+  ]
+}
+{% endschema %}

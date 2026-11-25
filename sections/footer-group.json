@@ -1,0 +1,17 @@
+{
+  "name": "Footer group",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "wordmark": "VESLORIA",
+        "brand_statement": "A contemporary luxury skincare house devoted to barrier-first formulations, tactile craft, and quiet daily equilibrium.",
+        "tagline": "EQUILIBRIUM, CONSIDERED."
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

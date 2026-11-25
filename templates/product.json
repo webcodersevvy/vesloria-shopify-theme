@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "delivery_accordion_body": "Every VESLORIA vessel ships in climate-controlled moulded-pulp protective cradles. Unopened cartons may be returned within your statutory return window.",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "related": {
+      "type": "related-formulations",
+      "settings": {
+        "heading": "COMPLETE THE RITUAL",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

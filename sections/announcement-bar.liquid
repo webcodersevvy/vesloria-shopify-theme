@@ -1,0 +1,42 @@
+<div class="vsl-announcement color-{{ section.settings.color_scheme }}" role="region" aria-label="Announcement">
+  {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}" class="vsl-announcement__text">
+      {{ section.settings.text | escape }}
+    </a>
+  {%- else -%}
+    <p class="vsl-announcement__text">{{ section.settings.text | escape }}</p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "INTRODUCING VESLORIA  —  BARRIER-FIRST LUXURY SKINCARE."
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Optional link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

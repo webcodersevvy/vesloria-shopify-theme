@@ -1,0 +1,117 @@
+{%- comment -%}
+  VESLORIA Slide-Over Shopping Bag Drawer (uses Shopify Section Rendering API via /?section_id=cart-drawer-items or /cart.js)
+{%- endcomment -%}
+<vsl-cart-drawer id="VesloriaCartDrawer" class="vsl-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle">
+  <div class="vsl-drawer__backdrop" data-cart-close></div>
+  <div class="vsl-drawer__panel">
+    <div class="vsl-drawer__header">
+      <div class="vsl-drawer__header-meta">
+        <h2 id="CartDrawerTitle" class="vsl-mono-xs vsl-text-ink">{{ 'sections.cart.drawer_title' | t }}</h2>
+        <span class="vsl-mono-xs vsl-text-eyebrow" data-cart-drawer-count>
+          {%- if cart.item_count == 1 -%}
+            {{ 'sections.cart.vessel_selected' | t }}
+          {%- else -%}
+            {{ 'sections.cart.vessels_selected' | t: count: cart.item_count }}
+          {%- endif -%}
+        </span>
+      </div>
+      <button type="button" class="vsl-drawer__close vsl-ui-label" data-cart-close aria-label="{{ 'general.accessibility.close_bag' | t }}">
+        {{ 'general.accessibility.close' | t }}
+      </button>
+    </div>
+
+    <div class="vsl-drawer__items" data-cart-drawer-items>
+      {%- if cart.empty? -%}
+        <div class="vsl-drawer__empty">
+          <h3 class="vsl-h3">{{ 'sections.cart.empty_title' | t }}</h3>
+          <p class="vsl-body-sm vsl-text-muted">{{ 'sections.cart.empty_copy' | t }}</p>
+          <a href="{{ routes.all_products_collection_url }}" class="vsl-editorial-link">
+            {{ 'sections.cart.continue_shopping' | t }}
+          </a>
+        </div>
+      {%- else -%}
+        {%- for item in cart.items -%}
+          <div class="vsl-drawer-item" data-cart-item-key="{{ item.key }}">
+            <a href="{{ item.url }}" class="vsl-drawer-item__media">
+              {%- if item.image != blank -%}
+                {{
+                  item.image
+                  | image_url: width: 240
+                  | image_tag:
+                    class: 'vsl-drawer-item__img',
+                    widths: '120, 240',
+                    sizes: '76px',
+                    loading: 'lazy',
+                    alt: item.title | escape
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'vsl-drawer-item__img' }}
+              {%- endif -%}
+            </a>
+            <div class="vsl-drawer-item__body">
+              <div class="vsl-drawer-item__top">
+                <a href="{{ item.url }}" class="vsl-drawer-item__title">{{ item.product.title }}</a>
+                <span class="vsl-drawer-item__price">{{ item.final_line_price | money_with_currency }}</span>
+              </div>
+              {%- unless item.product.has_only_default_variant -%}
+                <p class="vsl-mono-xs vsl-text-eyebrow">{{ item.variant.title }}</p>
+              {%- endunless -%}
+              <div class="vsl-drawer-item__controls">
+                <div class="vsl-qty-stepper" aria-label="Quantity">
+                  <button
+                    type="button"
+                    class="vsl-qty-btn"
+                    data-cart-qty-change
+                    data-key="{{ item.key }}"
+                    data-quantity="{{ item.quantity | minus: 1 }}"
+                    aria-label="{{ 'sections.cart.qty_decrease' | t }}"
+                  >−</button>
+                  <span class="vsl-qty-val">{{ item.quantity }}</span>
+                  <button
+                    type="button"
+                    class="vsl-qty-btn"
+                    data-cart-qty-change
+                    data-key="{{ item.key }}"
+                    data-quantity="{{ item.quantity | plus: 1 }}"
+                    aria-label="{{ 'sections.cart.qty_increase' | t }}"
+                  >+</button>
+                </div>
+                <button
+                  type="button"
+                  class="vsl-remove-link vsl-mono-xs"
+                  data-cart-qty-change
+                  data-key="{{ item.key }}"
+                  data-quantity="0"
+                >{{ 'sections.cart.remove' | t }}</button>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <div class="vsl-drawer__footer" data-cart-drawer-footer {% if cart.empty? %}hidden{% endif %}>
+      <div class="vsl-summary-row">
+        <span class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.cart.subtotal' | t }}</span>
+        <span class="vsl-body-sm" data-cart-drawer-subtotal>{{ cart.total_price | money_with_currency }}</span>
+      </div>
+      <div class="vsl-summary-row">
+        <span class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.cart.packaging_label' | t }}</span>
+        <span class="vsl-body-sm">{{ 'sections.cart.packaging_value' | t }}</span>
+      </div>
+      <div class="vsl-summary-total">
+        <span class="vsl-mono-xs vsl-text-ink">{{ 'sections.cart.estimated_total' | t }}</span>
+        <span class="vsl-h3" data-cart-drawer-total>{{ cart.total_price | money_with_currency }}</span>
+      </div>
+      <form action="{{ routes.cart_url }}" method="post" class="vsl-drawer__actions">
+        <button type="submit" name="checkout" class="vsl-btn vsl-btn--primary vsl-btn--full">
+          <span>{{ 'sections.cart.checkout' | t }}</span>
+        </button>
+      </form>
+      <a href="{{ routes.cart_url }}" class="vsl-editorial-link vsl-drawer__view-bag">
+        {{ 'sections.cart.view_bag' | t }}
+      </a>
+      <p class="vsl-caption vsl-text-eyebrow">{{ settings.trust_note }}</p>
+    </div>
+  </div>
+</vsl-cart-drawer>

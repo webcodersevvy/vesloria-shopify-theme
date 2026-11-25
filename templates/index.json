@@ -1,0 +1,101 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-editorial",
+      "settings": {
+        "eyebrow": "CONTEMPORARY LUXURY SKINCARE",
+        "headline": "EQUILIBRIUM, CONSIDERED.",
+        "subcopy": "Barrier-first formulations crafted through cellular restraint, tactile precision, and architectural vessel design.",
+        "primary_label": "EXPLORE THE CORE RITUAL",
+        "primary_url": "/collections",
+        "secondary_label": "OUR APPROACH",
+        "secondary_url": "/pages/about",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "intro": {
+      "type": "editorial-split-intro",
+      "settings": {
+        "eyebrow": "THE VESLORIA PERSPECTIVE",
+        "heading": "SKINCARE, HELD IN RESTRAINT.",
+        "body": "We approach skin health through the quiet relationship between barrier integrity, biocompatible actives, and tactile craft. Every formulation is composed to layer seamlessly, replacing routine fatigue with calm, repeatable daily care.",
+        "link_label": "DISCOVER OUR APPROACH →",
+        "link_url": "/pages/about",
+        "show_top_border": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "core-ritual": {
+      "type": "formulation-showcase",
+      "settings": {
+        "collection": "the-core-ritual",
+        "products_to_show": 4,
+        "eyebrow": "01 / THE CORE RITUAL  ·  VSL-CO-001",
+        "heading": "EQUILIBRIUM, DAILY.",
+        "description": "Four foundational formulations designed to cleanse, replenish, fortify, and seal the skin barrier in quiet sequence.",
+        "link_label": "VIEW THE CORE RITUAL →",
+        "link_url": "/collections/the-core-ritual",
+        "empty_text": "No formulations currently available.",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "editorial-macro": {
+      "type": "editorial-macro-split",
+      "settings": {
+        "image_position": "left",
+        "eyebrow": "THE VESLORIA APPROACH",
+        "heading": "FEWER FORMULATIONS. DEEPER EQUILIBRIUM.",
+        "body": "A measured alternative to multi-step excess. Formulated for long-term barrier resilience rather than temporary intensity — uniting biocompatible lipids, soothing humectants, and weightless sensory elegance.",
+        "button_label": "EXPLORE THE RITUAL GUIDE",
+        "button_url": "/pages/ritual-guide",
+        "color_scheme": "scheme-2"
+      }
+    },
+    "reserve-formulations": {
+      "type": "formulation-showcase",
+      "settings": {
+        "collection": "reserve-formulations",
+        "products_to_show": 2,
+        "eyebrow": "02 / RESERVE FORMULATIONS  ·  BATCH 01 & 02",
+        "heading": "CONCENTRATED FOR STILLNESS.",
+        "description": "Two intensive nocturnal treatments produced in numbered batches of 250 vessels inside UV-protective smoked olive-amber glass.",
+        "link_label": "DISCOVER RESERVE EDITIONS →",
+        "link_url": "/collections/reserve-formulations",
+        "empty_text": "Reserve batches currently archived.",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "manifesto": {
+      "type": "maison-manifesto",
+      "settings": {
+        "eyebrow": "THE MAISON",
+        "heading": "QUIET STEWARDSHIP FOR SKIN.",
+        "body": "We believe skincare should restore calm to both skin and shelf. Our work balances biological literacy with physical tactility — creating vessels meant to be lived with and formulas meant to be trusted daily.",
+        "link_label": "READ OUR PHILOSOPHY →",
+        "link_url": "/pages/about",
+        "cta_style": "link",
+        "show_top_border": true,
+        "boxed": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-notes",
+      "settings": {
+        "eyebrow": "VESLORIA NOTES",
+        "heading": "A CALMER PERSPECTIVE.",
+        "description": "Receive small-batch Reserve release notes, seasonal ritual guidance, and selected correspondence from VESLORIA.",
+        "color_scheme": "scheme-2"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "intro",
+    "core-ritual",
+    "editorial-macro",
+    "reserve-formulations",
+    "manifesto",
+    "newsletter"
+  ]
+}

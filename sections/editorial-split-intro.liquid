@@ -1,0 +1,90 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}{% if section.settings.show_top_border %} vsl-section--border-top{% endif %}">
+  <div class="vsl-container">
+    <div class="vsl-split-intro">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="vsl-split-intro__copy">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="vsl-h1 vsl-split-intro__heading">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <p class="vsl-body-lg vsl-text-muted vsl-split-intro__body">{{ section.settings.body | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.secondary_body != blank -%}
+          <p class="vsl-body-sm vsl-text-muted vsl-split-intro__body">{{ section.settings.secondary_body | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.link_label != blank -%}
+          <a href="{{ section.settings.link_url | default: '/pages/about' }}" class="vsl-editorial-link">
+            {{ section.settings.link_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial Split Intro",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Left column eyebrow",
+      "default": "THE VESLORIA PERSPECTIVE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SKINCARE, HELD IN RESTRAINT."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Lead paragraph",
+      "default": "We approach skin health through the quiet relationship between barrier integrity, biocompatible actives, and tactile craft. Every formulation is composed to layer seamlessly, replacing routine fatigue with calm, repeatable daily care."
+    },
+    {
+      "type": "textarea",
+      "id": "secondary_body",
+      "label": "Optional supporting paragraph"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "DISCOVER OUR APPROACH →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": "Show top hairline rule",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Split Intro"
+    }
+  ]
+}
+{% endschema %}

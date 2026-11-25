@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "collections-directory",
+      "settings": {
+        "eyebrow": "THE VESLORIA COLLECTIONS",
+        "heading": "TWO EXPRESSIONS OF EQUILIBRIUM.",
+        "subcopy": "Four daily barrier essentials housed in frosted flint glass, paired with two numbered nocturnal reserve formulations in UV-protective smoked olive glass.",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

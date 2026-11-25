@@ -1,0 +1,65 @@
+{
+  "current": {
+    "use_shopify_font_picker": false,
+    "page_width": 1344,
+    "cart_type": "drawer",
+    "color_schemes": {
+      "scheme-1": {
+        "settings": {
+          "background": "#FFFFFF",
+          "background_gradient": "",
+          "surface": "#F6F5F2",
+          "text": "#161616",
+          "text_muted": "#454340",
+          "text_eyebrow": "#6E655D",
+          "border": "#EAE8E3",
+          "button": "#161616",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#161616"
+        }
+      },
+      "scheme-2": {
+        "settings": {
+          "background": "#F6F5F2",
+          "background_gradient": "",
+          "surface": "#FFFFFF",
+          "text": "#161616",
+          "text_muted": "#454340",
+          "text_eyebrow": "#6E655D",
+          "border": "#EAE8E3",
+          "button": "#161616",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#161616"
+        }
+      },
+      "scheme-3": {
+        "settings": {
+          "background": "#3D423A",
+          "background_gradient": "",
+          "surface": "#4A5046",
+          "text": "#FFFFFF",
+          "text_muted": "#EAE8E3",
+          "text_eyebrow": "#C4BCB1",
+          "border": "#5B6157",
+          "button": "#FFFFFF",
+          "button_label": "#161616",
+          "secondary_button_label": "#FFFFFF"
+        }
+      },
+      "scheme-4": {
+        "settings": {
+          "background": "#161616",
+          "background_gradient": "",
+          "surface": "#2E2D2B",
+          "text": "#FFFFFF",
+          "text_muted": "#EAE8E3",
+          "text_eyebrow": "#C4BCB1",
+          "border": "#454340",
+          "button": "#FFFFFF",
+          "button_label": "#161616",
+          "secondary_button_label": "#FFFFFF"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container vsl-container--narrow">
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <p class="vsl-mono vsl-text-eyebrow">{{ shop.name | upcase }}</p>
+      <h1 class="vsl-h1">{{ page.title | escape }}</h1>
+      {%- if page.content != blank -%}
+        <div class="vsl-body-lg vsl-text-muted">
+          {{ page.content }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Page",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

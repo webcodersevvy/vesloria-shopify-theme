@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "main": {
+      "type": "policy-editorial",
+      "blocks": {
+        "c1": {
+          "type": "clause",
+          "settings": {
+            "title": "01. Dispatch & Carrier Selection",
+            "body": "<p>Orders are prepared in climate-controlled fulfilment and dispatched subject to formulation availability and payment confirmation. Exact shipping methods, transit windows, and charges are calculated and displayed at Shopify Checkout.</p>"
+          }
+        },
+        "c2": {
+          "type": "clause",
+          "settings": {
+            "title": "02. Temperature-Conscious Transit",
+            "body": "<p>Because botanical lipids and lamellar emulsions are sensitive to extreme heat or freezing temperatures, we recommend express tracked delivery during peak summer or winter weather.</p>"
+          }
+        },
+        "c3": {
+          "type": "clause",
+          "settings": {
+            "title": "03. International Cosmetic Customs",
+            "body": "<p>International orders outside the primary domestic market may incur destination VAT, GST, or import duties assessed by local customs authorities.</p>"
+          }
+        },
+        "c4": {
+          "type": "clause",
+          "settings": {
+            "title": "04. Damaged-in-Transit Replacement",
+            "body": "<p>Should any glass vessel arrive cracked or leaking, contact Client Care with photographs and your order reference within 7 days of delivery for prompt replacement.</p>"
+          }
+        }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
+      "settings": {
+        "eyebrow": "CLIENT CARE  ·  DISPATCH",
+        "heading": "SHIPPING & DELIVERY",
+        "intro": "Every VESLORIA order is packed inside custom moulded-pulp protective cradles engineered specifically for heavyweight frosted flint and smoked glass vessels.",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

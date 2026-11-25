@@ -1,0 +1,225 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign step_label = product.metafields.custom.step_or_batch.value | default: product.type | default: 'FORMULATION'
+  assign sku_label = current_variant.sku | default: product.metafields.custom.sku_reference.value
+  assign tech_strip = product.metafields.custom.technical_strip.value
+  assign helper_note = product.metafields.custom.option_helper_note.value
+  assign formulation_notes = product.metafields.custom.formulation_notes.value
+  assign key_actives = product.metafields.custom.key_actives_inci.value
+  assign application_ritual = product.metafields.custom.application_ritual.value
+  assign delivery_note = section.settings.delivery_accordion_body
+-%}
+
+<section class="vsl-section--compact color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <nav class="vsl-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}" class="vsl-mono-xs vsl-breadcrumb__link">{{ 'general.breadcrumbs.home' | t }}</a>
+      <span class="vsl-mono vsl-text-eyebrow" aria-hidden="true">/</span>
+      <a href="{{ routes.collections_url }}" class="vsl-mono-xs vsl-breadcrumb__link">{{ 'general.breadcrumbs.collections' | t }}</a>
+      <span class="vsl-mono vsl-text-eyebrow" aria-hidden="true">/</span>
+      <span class="vsl-mono-xs vsl-text-ink">{{ product.title | upcase | escape }}</span>
+    </nav>
+
+    <div class="vsl-pdp">
+      <div class="vsl-pdp__gallery">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media limit: 4 -%}
+            <div class="vsl-pdp__media-tile">
+              {{
+                media
+                | image_url: width: 1200
+                | image_tag:
+                  widths: '400, 700, 1000, 1200',
+                  sizes: '(min-width: 960px) 28vw, 94vw',
+                  loading: 'eager',
+                  alt: media.alt | default: product.title | escape
+              }}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="vsl-pdp__media-tile">{{ 'product-1' | placeholder_svg_tag }}</div>
+          <div class="vsl-pdp__media-tile">{{ 'product-2' | placeholder_svg_tag }}</div>
+        {%- endif -%}
+      </div>
+
+      <vsl-product-form class="vsl-pdp__info">
+        <div class="vsl-pdp__meta-row">
+          <p class="vsl-mono vsl-text-eyebrow">{{ step_label | escape }}</p>
+          {%- if sku_label != blank -%}
+            <p class="vsl-mono-xs vsl-text-eyebrow">{{ sku_label | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        <h1 class="vsl-h1">{{ product.title | escape }}</h1>
+
+        <p class="vsl-pdp__price" data-product-price>
+          {{ current_variant.price | money_with_currency }}
+        </p>
+
+        {%- if product.description != blank -%}
+          <div class="vsl-body-sm vsl-text-muted">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- if tech_strip != blank -%}
+          <div class="vsl-pdp__tech-strip">
+            <p class="vsl-mono-xs vsl-text-eyebrow">{{ tech_strip | escape }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- form 'product', product, id: 'VesloriaProductForm' -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+          {%- unless product.has_only_default_variant -%}
+            <div class="vsl-field" style="margin-bottom: 18px;">
+              <span class="vsl-mono-xs vsl-text-eyebrow">
+                SELECT {{ product.options.first | upcase | escape }}
+              </span>
+              <div class="vsl-variant-tiles" role="radiogroup" aria-label="{{ product.options.first | escape }}">
+                {%- for variant in product.variants -%}
+                  <button
+                    type="button"
+                    class="vsl-variant-tile{% if variant.id == current_variant.id %} is-active{% endif %}"
+                    data-variant-tile
+                    data-variant-id="{{ variant.id }}"
+                    data-variant-price="{{ variant.price | money_with_currency }}"
+                    data-variant-available="{{ variant.available }}"
+                    data-variant-note="{{ variant.metafields.custom.helper_note.value | default: helper_note | escape }}"
+                    {% unless variant.available %}disabled{% endunless %}
+                  >
+                    {{ variant.title | escape }} — {{ variant.price | money_without_trailing_zeros }}
+                  </button>
+                {%- endfor -%}
+              </div>
+
+              {%- if helper_note != blank -%}
+                <div class="vsl-helper-note">
+                  <p class="vsl-mono-xs vsl-text-muted" data-variant-note>{{ helper_note | escape }}</p>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endunless -%}
+
+          <div style="margin-bottom: 18px;">
+            <a href="/pages/ritual-guide" class="vsl-editorial-link">
+              {{ 'sections.product.ritual_guide_link' | t }}
+            </a>
+          </div>
+
+          <button
+            type="submit"
+            name="add"
+            class="vsl-btn vsl-btn--primary vsl-btn--full"
+            data-add-to-bag
+            {% unless current_variant.available %}disabled{% endunless %}
+          >
+            <span>
+              {%- if current_variant.available -%}
+                {{ 'sections.product.add_to_bag' | t }}
+              {%- else -%}
+                {{ 'sections.product.sold_out' | t }}
+              {%- endif -%}
+            </span>
+          </button>
+        {%- endform -%}
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}
+            <div {{ block.shopify_attributes }}>{% render block %}</div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        <vsl-accordion class="vsl-accordions">
+          {%- if formulation_notes != blank -%}
+            <div class="vsl-accordion">
+              <button type="button" class="vsl-accordion__trigger" data-accordion-trigger aria-expanded="false">
+                <span class="vsl-ui-label">FORMULATION NOTES</span>
+                <span class="vsl-accordion__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="vsl-accordion__panel" data-accordion-panel hidden>
+                {{ formulation_notes | escape }}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if key_actives != blank -%}
+            <div class="vsl-accordion">
+              <button type="button" class="vsl-accordion__trigger" data-accordion-trigger aria-expanded="false">
+                <span class="vsl-ui-label">KEY ACTIVES &amp; FULL INCI</span>
+                <span class="vsl-accordion__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="vsl-accordion__panel" data-accordion-panel hidden>
+                {{ key_actives | escape }}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if application_ritual != blank -%}
+            <div class="vsl-accordion">
+              <button type="button" class="vsl-accordion__trigger" data-accordion-trigger aria-expanded="false">
+                <span class="vsl-ui-label">APPLICATION RITUAL</span>
+                <span class="vsl-accordion__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="vsl-accordion__panel" data-accordion-panel hidden>
+                {{ application_ritual | escape }}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if delivery_note != blank -%}
+            <div class="vsl-accordion">
+              <button type="button" class="vsl-accordion__trigger" data-accordion-trigger aria-expanded="false">
+                <span class="vsl-ui-label">DELIVERY &amp; RETURNS</span>
+                <span class="vsl-accordion__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="vsl-accordion__panel" data-accordion-panel hidden>
+                {{ delivery_note | escape }}
+              </div>
+            </div>
+          {%- endif -%}
+        </vsl-accordion>
+      </vsl-product-form>
+    </div>
+
+    {%- if collection -%}
+      {%- if collection.previous_product or collection.next_product -%}
+        <nav class="vsl-pdp__prev-next" aria-label="Adjacent formulations">
+          {%- if collection.previous_product -%}
+            <a href="{{ collection.previous_product.url }}" class="vsl-mono vsl-text-ink">
+              {{ 'sections.product.previous_formulation' | t: title: collection.previous_product.title | upcase }}
+            </a>
+          {%- else -%}
+            <span></span>
+          {%- endif -%}
+          {%- if collection.next_product -%}
+            <a href="{{ collection.next_product.url }}" class="vsl-mono vsl-text-ink">
+              {{ 'sections.product.next_formulation' | t: title: collection.next_product.title | upcase }}
+            </a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formulation Detail (PDP)",
+  "blocks": [
+    { "type": "@app" }
+  ],
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "delivery_accordion_body",
+      "label": "Delivery & Returns copy",
+      "default": "Every VESLORIA vessel ships in climate-controlled moulded-pulp protective cradles. Unopened cartons may be returned within your statutory return window."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

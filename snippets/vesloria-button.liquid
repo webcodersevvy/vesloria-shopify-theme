@@ -1,0 +1,23 @@
+{%- comment -%}
+  VESLORIA Button Snippet
+  Usage: {% render 'vesloria-button', label: 'EXPLORE', url: '/collections', style: 'primary', full_width: false %}
+{%- endcomment -%}
+{%- liquid
+  assign btn_style = style | default: 'primary'
+  assign classes = 'vsl-btn vsl-btn--' | append: btn_style
+  if full_width
+    assign classes = classes | append: ' vsl-btn--full'
+  endif
+  if extra_class != blank
+    assign classes = classes | append: ' ' | append: extra_class
+  endif
+-%}
+{%- if url != blank -%}
+  <a href="{{ url }}" class="{{ classes }}">
+    <span>{{ label }}</span>
+  </a>
+{%- else -%}
+  <button type="{{ type | default: 'button' }}" class="{{ classes }}" {% if disabled %}disabled{% endif %}>
+    <span>{{ label }}</span>
+  </button>
+{%- endif -%}

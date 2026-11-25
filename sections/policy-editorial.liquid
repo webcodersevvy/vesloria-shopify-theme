@@ -1,0 +1,109 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container vsl-container--narrow">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="vsl-h1">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="vsl-body-lg vsl-text-muted">{{ section.settings.intro | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign summary_blocks = section.blocks | where: 'type', 'summary_item' -%}
+    {%- if summary_blocks.size > 0 -%}
+      <div class="vsl-summary-strip">
+        {%- for block in summary_blocks -%}
+          <div style="display: flex; flex-direction: column; gap: 6px;" {{ block.shopify_attributes }}>
+            <p class="vsl-mono-xs vsl-text-eyebrow">{{ block.settings.label | escape }}</p>
+            <p class="vsl-body-sm" style="font-weight: 500;">{{ block.settings.value | escape }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="vsl-policy-list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'clause' -%}
+          <div class="vsl-policy-item" {{ block.shopify_attributes }}>
+            <h2 class="vsl-h3">{{ block.settings.title | escape }}</h2>
+            <div class="vsl-body-sm vsl-text-muted">{{ block.settings.body }}</div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- assign link_blocks = section.blocks | where: 'type', 'related_link' -%}
+    {%- if link_blocks.size > 0 -%}
+      <div class="vsl-related-policies">
+        {%- for block in link_blocks -%}
+          <a href="{{ block.settings.url }}" class="vsl-mono-xs vsl-editorial-link" {{ block.shopify_attributes }}>
+            {{ block.settings.label | escape }}
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Policy Editorial",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CLIENT CARE  ·  DISPATCH"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "SHIPPING & DELIVERY"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Lead paragraph"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "summary_item",
+      "name": "Summary Strip Card",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "BRAND STATUS" },
+        { "type": "text", "id": "value", "label": "Value", "default": "Fictional Concept — Not a Real Commercial Entity" }
+      ]
+    },
+    {
+      "type": "clause",
+      "name": "Numbered Clause",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Clause Title", "default": "01. Clause Title" },
+        { "type": "richtext", "id": "body", "label": "Clause Body", "default": "<p>Policy details.</p>" }
+      ]
+    },
+    {
+      "type": "related_link",
+      "name": "Related Policy Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "TERMS & CONDITIONS →" },
+        { "type": "url", "id": "url", "label": "Destination" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Policy Editorial"
+    }
+  ]
+}
+{% endschema %}

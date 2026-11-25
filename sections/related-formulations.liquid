@@ -1,0 +1,42 @@
+<section class="vsl-section--compact color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <h2 class="vsl-h2" style="margin-bottom: 32px;">{{ section.settings.heading | escape }}</h2>
+
+    {%- liquid
+      assign rec_products = recommendations.products
+      if rec_products.size == 0 and product.collections.first != blank
+        assign rec_products = product.collections.first.products
+      endif
+    -%}
+
+    <div class="vsl-grid-2">
+      {%- assign shown = 0 -%}
+      {%- for rec in rec_products -%}
+        {%- if rec.id != product.id and shown < 2 -%}
+          {% render 'product-card', product: rec, loading: 'lazy' %}
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Complete the Ritual",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "COMPLETE THE RITUAL"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

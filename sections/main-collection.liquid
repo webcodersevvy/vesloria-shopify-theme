@@ -1,0 +1,201 @@
+{%- liquid
+  assign is_all = false
+  if collection.handle == 'all' or section.settings.show_filter_bar
+    assign is_all = true
+  endif
+  assign ref_label = collection.metafields.custom.reference.value | default: 'COMPLETE ARCHIVE'
+  assign subtitle_label = collection.metafields.custom.subtitle.value
+  assign editorial_title = collection.metafields.custom.editorial_title.value
+  assign editorial_body = collection.metafields.custom.editorial_body.value
+-%}
+
+<section class="vsl-section--compact color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <nav class="vsl-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}" class="vsl-mono-xs vsl-breadcrumb__link">{{ 'general.breadcrumbs.home' | t }}</a>
+      <span class="vsl-mono vsl-text-eyebrow" aria-hidden="true">/</span>
+      {%- if collection.handle == 'all' -%}
+        <span class="vsl-mono-xs vsl-text-ink">{{ 'general.breadcrumbs.shop_all' | t }}</span>
+      {%- else -%}
+        <a href="{{ routes.collections_url }}" class="vsl-mono-xs vsl-breadcrumb__link">{{ 'general.breadcrumbs.collections' | t }}</a>
+        <span class="vsl-mono vsl-text-eyebrow" aria-hidden="true">/</span>
+        <span class="vsl-mono-xs vsl-text-ink">{{ collection.title | upcase | escape }}</span>
+      {%- endif -%}
+    </nav>
+
+    {%- if section.settings.show_hero_image and collection.image != blank -%}
+      <div class="vsl-collection-row__media" style="margin-bottom: clamp(32px, 4vw, 56px);">
+        {{
+          collection.image
+          | image_url: width: 1800
+          | image_tag:
+            widths: '700, 1200, 1800',
+            sizes: '(min-width: 901px) 92vw, 94vw',
+            loading: 'eager',
+            alt: collection.image.alt | default: collection.title | escape
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="vsl-collection-row__meta">
+      <div class="vsl-collection-row__left">
+        <p class="vsl-mono vsl-text-eyebrow">
+          {%- if collection.handle == 'all' -%}
+            {{ ref_label }} &nbsp;·&nbsp; {% if collection.products_count < 10 %}0{% endif %}{{ collection.products_count }} FORMULATIONS
+          {%- else -%}
+            {{ ref_label | escape }}
+          {%- endif -%}
+        </p>
+        <h1 class="vsl-h1">
+          {%- if collection.handle == 'all' -%}
+            {{ section.settings.all_heading | default: 'ALL FORMULATIONS.' | escape }}
+          {%- else -%}
+            {{ collection.title | escape }}
+          {%- endif -%}
+        </h1>
+        {%- if subtitle_label != blank -%}
+          <p class="vsl-collection-row__subtitle">{{ subtitle_label | escape }}</p>
+        {%- endif -%}
+        {%- if collection.description != blank -%}
+          <div class="vsl-body-lg vsl-text-muted">{{ collection.description }}</div>
+        {%- elsif collection.handle == 'all' and section.settings.all_subcopy != blank -%}
+          <p class="vsl-body-lg vsl-text-muted">{{ section.settings.all_subcopy | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="vsl-collection-row__right">
+        {%- if collection.handle == 'all' -%}
+          <a href="/pages/ritual-guide" class="vsl-editorial-link">VIEW RITUAL &amp; LAYERING GUIDE →</a>
+        {%- else -%}
+          <p class="vsl-mono vsl-text-eyebrow">
+            {%- if collection.products_count < 10 -%}0{%- endif -%}{{ collection.products_count }} FORMULATIONS
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <vsl-collection-filter>
+      {%- if is_all -%}
+        <div class="vsl-filter-bar">
+          <div class="vsl-filter-tabs" role="tablist" aria-label="Filter by collection">
+            <button type="button" class="vsl-filter-tab is-active" data-filter-tab="all" role="tab" aria-selected="true">
+              {{ 'sections.collection.all_formulations' | t }}
+            </button>
+            {%- for col in collections -%}
+              {%- unless col.handle == 'all' -%}
+                <button type="button" class="vsl-filter-tab" data-filter-tab="{{ col.handle }}" role="tab" aria-selected="false">
+                  {{ col.title | upcase | escape }}
+                </button>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+
+          <div class="vsl-search-reset">
+            <input
+              type="search"
+              class="vsl-input vsl-input--surface"
+              data-filter-search
+              placeholder="{{ 'general.search.placeholder' | t }}"
+              aria-label="{{ 'general.search.placeholder' | t }}"
+            >
+            <button type="button" class="vsl-reset-btn" data-filter-reset>
+              {{ 'general.search.reset' | t }}
+            </button>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- paginate collection.products by section.settings.products_per_page -%}
+        {%- if collection.products_count > 0 -%}
+          <div class="vsl-grid-2" {% unless is_all %}style="margin-top: clamp(36px, 4.5vw, 64px);"{% endunless %}>
+            {%- for product in collection.products -%}
+              {% render 'product-card', product: product, loading: 'lazy' %}
+            {%- endfor -%}
+          </div>
+
+          <div class="vsl-empty-box" data-filter-empty hidden style="margin-top: 32px;">
+            <h3 class="vsl-h3">{{ 'sections.collection.empty' | t }}</h3>
+            <p class="vsl-body-sm vsl-text-muted">{{ 'sections.collection.empty_hint' | t }}</p>
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="vsl-pdp__prev-next" aria-label="Pagination">
+              {%- if paginate.previous -%}
+                <a href="{{ paginate.previous.url }}" class="vsl-mono vsl-editorial-link">← {{ 'general.pagination.previous' | t }}</a>
+              {%- else -%}
+                <span></span>
+              {%- endif -%}
+              <span class="vsl-mono-xs vsl-text-eyebrow">{{ paginate.current_page }} / {{ paginate.pages }}</span>
+              {%- if paginate.next -%}
+                <a href="{{ paginate.next.url }}" class="vsl-mono vsl-editorial-link">{{ 'general.pagination.next' | t }} →</a>
+              {%- else -%}
+                <span></span>
+              {%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- else -%}
+          <div class="vsl-empty-box" style="margin-top: 40px;">
+            <h3 class="vsl-h3">{{ 'sections.collection.empty' | t }}</h3>
+          </div>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </vsl-collection-filter>
+
+    {%- if editorial_title != blank -%}
+      <div class="vsl-manifesto vsl-manifesto--box vsl-section--border-top" style="margin-top: clamp(48px, 6vw, 72px); border-bottom: 1px solid var(--color-mineral-mist);">
+        <h2 class="vsl-h2 vsl-manifesto__heading">{{ editorial_title | escape }}</h2>
+        {%- if editorial_body != blank -%}
+          <p class="vsl-body-lg vsl-text-muted vsl-manifesto__body">{{ editorial_body | escape }}</p>
+        {%- endif -%}
+        <a href="{{ routes.collections_url }}" class="vsl-editorial-link">EXPLORE ALL COLLECTIONS →</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_hero_image",
+      "label": "Show collection banner image",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filter_bar",
+      "label": "Show collection tabs and search filter",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "all_heading",
+      "label": "Heading when viewing Shop All",
+      "default": "ALL FORMULATIONS."
+    },
+    {
+      "type": "textarea",
+      "id": "all_subcopy",
+      "label": "Subcopy when viewing Shop All",
+      "default": "Filter across our four daily Core Ritual staples and two numbered Reserve nocturnal treatments, or search by formulation name."
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "default": 12,
+      "label": "Formulations per page"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

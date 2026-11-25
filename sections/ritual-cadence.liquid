@@ -1,0 +1,162 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <div class="vsl-page-intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="vsl-h1">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.intro != blank -%}
+        <p class="vsl-body-lg vsl-text-muted">{{ section.settings.intro | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="vsl-cadence-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'cadence' -%}
+          <div class="vsl-cadence-card{% if block.settings.dark_theme %} vsl-cadence-card--dark{% endif %}" {{ block.shopify_attributes }}>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <p class="vsl-mono-xs{% unless block.settings.dark_theme %} vsl-text-eyebrow{% else %} vsl-text-mist{% endunless %}">
+                {{ block.settings.eyebrow | escape }}
+              </p>
+              <h2 class="vsl-h3">{{ block.settings.title | escape }}</h2>
+            </div>
+
+            {%- for i in (1..4) -%}
+              {%- assign k_key = 'step_' | append: i | append: '_label' -%}
+              {%- assign v_key = 'step_' | append: i | append: '_value' -%}
+              {%- if block.settings[k_key] != blank -%}
+                <div class="vsl-cadence-step">
+                  <p class="vsl-mono-xs{% unless block.settings.dark_theme %} vsl-text-eyebrow{% else %} vsl-text-mist{% endunless %}">
+                    {{ block.settings[k_key] | escape }}
+                  </p>
+                  <p class="vsl-body-sm">{{ block.settings[v_key] | escape }}</p>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="vsl-section--border-top" style="margin-top: clamp(48px, 6vw, 72px); padding-top: 48px;">
+      <div style="display: flex; flex-direction: column; gap: 28px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.volume_eyebrow | escape }}</p>
+          <h2 class="vsl-h2">{{ section.settings.volume_heading | escape }}</h2>
+        </div>
+
+        <div class="vsl-volume-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'volume' -%}
+              <div class="vsl-volume-card" {{ block.shopify_attributes }}>
+                <p class="vsl-mono-xs vsl-text-eyebrow">{{ block.settings.fl_oz | escape }}</p>
+                <p class="vsl-h2">{{ block.settings.ml | escape }}</p>
+                <p class="vsl-body-sm" style="font-weight: 500;">{{ block.settings.duration | escape }}</p>
+                <p class="vsl-caption vsl-text-muted">{{ block.settings.applies_to | escape }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <div style="display: flex; justify-content: center; margin-top: 24px;">
+            {% render 'vesloria-button',
+              label: section.settings.cta_label,
+              url: section.settings.cta_url,
+              style: 'primary'
+            %}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ritual Cadence & Volumes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "RITUAL & LAYERING GUIDE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THE DAILY CADENCE."
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro copy",
+      "default": "Every VESLORIA formulation is calibrated to layer cleanly from lightest aqueous fluid to richest lipid seal — without pilling, heaviness, or active conflict."
+    },
+    {
+      "type": "text",
+      "id": "volume_eyebrow",
+      "label": "Volume section eyebrow",
+      "default": "VOLUME & USAGE LONGEVITY"
+    },
+    {
+      "type": "text",
+      "id": "volume_heading",
+      "label": "Volume section heading",
+      "default": "Vessel Volume Reference"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Bottom CTA label",
+      "default": "EXPLORE THE CORE RITUAL"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Bottom CTA link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cadence",
+      "name": "Cadence Column",
+      "settings": [
+        { "type": "checkbox", "id": "dark_theme", "label": "Deep Olive Clay (Reserve) card", "default": false },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "01 / MORNING (AM)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Daily Protection & Balance" },
+        { "type": "text", "id": "step_1_label", "label": "Step 1 label", "default": "STEP 01 · CLEANSE" },
+        { "type": "text", "id": "step_1_value", "label": "Step 1 copy", "default": "Sola Milk Cleanser (1–2 pumps)" },
+        { "type": "text", "id": "step_2_label", "label": "Step 2 label", "default": "STEP 02 · REPLENISH" },
+        { "type": "text", "id": "step_2_value", "label": "Step 2 copy", "default": "Vela Essence Serum (3–4 drops)" },
+        { "type": "text", "id": "step_3_label", "label": "Step 3 label", "default": "STEP 03 · FORTIFY" },
+        { "type": "text", "id": "step_3_value", "label": "Step 3 copy", "default": "Cera Barrier Cream (pearl amount)" },
+        { "type": "text", "id": "step_4_label", "label": "Step 4 label", "default": "STEP 04 · PROTECT" },
+        { "type": "text", "id": "step_4_value", "label": "Step 4 copy", "default": "Broad-Spectrum SPF (your own)" }
+      ]
+    },
+    {
+      "type": "volume",
+      "name": "Volume Card",
+      "settings": [
+        { "type": "text", "id": "fl_oz", "label": "Fluid ounces", "default": "1.0 FL. OZ." },
+        { "type": "text", "id": "ml", "label": "Milliliters", "default": "30 ML" },
+        { "type": "text", "id": "duration", "label": "Usage duration", "default": "Approx. 8–10 weeks" },
+        { "type": "text", "id": "applies_to", "label": "Applicable formulations", "default": "Vela Serum · Olea Elixir · No. 01 Concentrate" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ritual Cadence & Volumes"
+    }
+  ]
+}
+{% endschema %}

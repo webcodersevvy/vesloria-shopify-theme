@@ -1,0 +1,140 @@
+<footer class="vsl-footer" role="contentinfo">
+  <div class="vsl-container">
+    <div class="vsl-footer__top">
+      <div class="vsl-footer__brand">
+        <a href="{{ routes.root_url }}" class="vsl-footer__wordmark">
+          {{ section.settings.wordmark | default: shop.name | escape }}
+        </a>
+        <p class="vsl-body-sm vsl-text-muted">
+          {{ section.settings.brand_statement | escape }}
+        </p>
+      </div>
+
+      <div class="vsl-footer__cols">
+        {%- for block in section.blocks -%}
+          <div class="vsl-footer__col" {{ block.shopify_attributes }}>
+            <p class="vsl-mono-xs vsl-text-eyebrow">{{ block.settings.heading | escape }}</p>
+            {%- if block.settings.menu != blank -%}
+              {%- for link in block.settings.menu.links -%}
+                <a href="{{ link.url }}" class="vsl-footer__col-link">{{ link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              {%- case forloop.index -%}
+                {%- when 1 -%}
+                  <a href="{{ routes.all_products_collection_url }}" class="vsl-footer__col-link">Shop All Formulations</a>
+                  <a href="{{ routes.collections_url }}" class="vsl-footer__col-link">All Collections</a>
+                  <a href="{{ routes.collections_url }}/the-core-ritual" class="vsl-footer__col-link">The Core Ritual</a>
+                  <a href="{{ routes.collections_url }}/reserve-formulations" class="vsl-footer__col-link">Reserve Formulations</a>
+                {%- when 2 -%}
+                  <a href="/pages/ritual-guide" class="vsl-footer__col-link">Ritual &amp; Layering Guide</a>
+                  <a href="/pages/contact" class="vsl-footer__col-link">Contact</a>
+                  <a href="/pages/shipping" class="vsl-footer__col-link">Shipping &amp; Delivery</a>
+                  <a href="/pages/returns" class="vsl-footer__col-link">Returns &amp; Refunds</a>
+                {%- when 3 -%}
+                  <a href="/pages/about" class="vsl-footer__col-link">About VESLORIA</a>
+                  {%- if settings.social_instagram_link != blank -%}
+                    <a href="{{ settings.social_instagram_link }}" class="vsl-footer__col-link" rel="noopener noreferrer" target="_blank">Instagram</a>
+                  {%- endif -%}
+                  {%- if shop.customer_accounts_enabled -%}
+                    <a href="{{ routes.account_url }}" class="vsl-footer__col-link">Client Account</a>
+                  {%- endif -%}
+                  <a href="/pages/terms" class="vsl-footer__col-link">Terms &amp; Conditions</a>
+                  <a href="/pages/disclaimer" class="vsl-footer__col-link">Project &amp; AI Disclaimer</a>
+              {%- endcase -%}
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <div class="vsl-footer__col">
+            <p class="vsl-mono-xs vsl-text-eyebrow">COLLECTIONS</p>
+            <a href="{{ routes.all_products_collection_url }}" class="vsl-footer__col-link">Shop All Formulations</a>
+            <a href="{{ routes.collections_url }}" class="vsl-footer__col-link">All Collections</a>
+            <a href="{{ routes.collections_url }}/the-core-ritual" class="vsl-footer__col-link">The Core Ritual</a>
+            <a href="{{ routes.collections_url }}/reserve-formulations" class="vsl-footer__col-link">Reserve Formulations</a>
+          </div>
+          <div class="vsl-footer__col">
+            <p class="vsl-mono-xs vsl-text-eyebrow">CLIENT CARE</p>
+            <a href="/pages/ritual-guide" class="vsl-footer__col-link">Ritual &amp; Layering Guide</a>
+            <a href="/pages/contact" class="vsl-footer__col-link">Contact</a>
+            <a href="/pages/shipping" class="vsl-footer__col-link">Shipping &amp; Delivery</a>
+            <a href="/pages/returns" class="vsl-footer__col-link">Returns &amp; Refunds</a>
+          </div>
+          <div class="vsl-footer__col">
+            <p class="vsl-mono-xs vsl-text-eyebrow">THE MAISON</p>
+            <a href="/pages/about" class="vsl-footer__col-link">About VESLORIA</a>
+            <a href="{{ routes.account_url }}" class="vsl-footer__col-link">Client Account</a>
+            <a href="/pages/terms" class="vsl-footer__col-link">Terms &amp; Conditions</a>
+            <a href="/pages/disclaimer" class="vsl-footer__col-link">Project &amp; AI Disclaimer</a>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="vsl-footer__bottom">
+      <p class="vsl-mono-xs vsl-text-eyebrow">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name | upcase }}. ALL RIGHTS RESERVED.
+      </p>
+      <p class="vsl-mono-xs vsl-text-eyebrow">
+        {{ section.settings.tagline | escape }}
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Vesloria Footer",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "wordmark",
+      "label": "Wordmark",
+      "default": "VESLORIA"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_statement",
+      "label": "Brand statement",
+      "default": "A contemporary luxury skincare house devoted to barrier-first formulations, tactile craft, and quiet daily equilibrium."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Bottom right tagline",
+      "default": "EQUILIBRIUM, CONSIDERED."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "COLLECTIONS"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vesloria Footer",
+      "blocks": [
+        { "type": "link_column", "settings": { "heading": "COLLECTIONS" } },
+        { "type": "link_column", "settings": { "heading": "CLIENT CARE" } },
+        { "type": "link_column", "settings": { "heading": "THE MAISON" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

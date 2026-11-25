@@ -1,0 +1,149 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="vsl-h1">{{ section.settings.heading | escape }}</h1>
+    </div>
+
+    <div class="vsl-contact-split">
+      <div class="vsl-contact-directory">
+        {%- for block in section.blocks -%}
+          <div style="display: flex; flex-direction: column; gap: 6px;" {{ block.shopify_attributes }}>
+            <p class="vsl-mono-xs vsl-text-eyebrow">{{ block.settings.heading | escape }}</p>
+            <p class="vsl-body-sm vsl-text-muted">{{ block.settings.body | escape }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div>
+        {%- form 'contact', id: 'VesloriaContactForm', style: 'display: flex; flex-direction: column; gap: 20px;' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="vsl-form-status vsl-form-status--success" role="status">
+              {{ 'sections.contact.success' | t }}
+            </div>
+          {%- elsif form.errors -%}
+            <div class="vsl-form-status vsl-form-status--error" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="vsl-field">
+            <label for="ContactName" class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.contact.full_name' | t }}</label>
+            <input
+              id="ContactName"
+              type="text"
+              name="contact[name]"
+              class="vsl-input"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="{{ 'sections.contact.full_name_placeholder' | t }}"
+              required
+            >
+          </div>
+
+          <div class="vsl-field">
+            <label for="ContactEmail" class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.contact.email' | t }}</label>
+            <input
+              id="ContactEmail"
+              type="email"
+              name="contact[email]"
+              class="vsl-input"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder="{{ 'sections.contact.email_placeholder' | t }}"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="vsl-field">
+            <label for="ContactEnquiryType" class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.contact.enquiry_type' | t }}</label>
+            <select id="ContactEnquiryType" name="contact[enquiry_type]" class="vsl-select">
+              <option value="Formulation & Ritual Guidance">Formulation &amp; Ritual Guidance</option>
+              <option value="Order & Fragile-Glass Transit">Order &amp; Fragile-Glass Transit</option>
+              <option value="Refill Vessel Compatibility">Refill Vessel Compatibility</option>
+              <option value="Press & Editorial">Press &amp; Editorial</option>
+            </select>
+          </div>
+
+          <div class="vsl-field">
+            <label for="ContactOrderRef" class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.contact.order_ref' | t }}</label>
+            <input
+              id="ContactOrderRef"
+              type="text"
+              name="contact[order_reference]"
+              class="vsl-input"
+              placeholder="{{ 'sections.contact.order_ref_placeholder' | t }}"
+            >
+          </div>
+
+          <div class="vsl-field">
+            <label for="ContactMessage" class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.contact.message' | t }}</label>
+            <textarea
+              id="ContactMessage"
+              name="contact[body]"
+              class="vsl-textarea"
+              placeholder="{{ 'sections.contact.message_placeholder' | t }}"
+              required
+            >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+
+          <button type="submit" class="vsl-btn vsl-btn--primary vsl-btn--full">
+            <span>{{ 'sections.contact.submit' | t }}</span>
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Client Care Contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CLIENT CARE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "WE’RE HERE TO ASSIST."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "directory_item",
+      "name": "Directory Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "CLIENT CARE & RITUAL ENQUIRIES"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Details",
+          "default": "For formulation compatibility, layering sequence questions, or refill vessel compatibility: care@vesloria.com"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Client Care Contact"
+    }
+  ]
+}
+{% endschema %}

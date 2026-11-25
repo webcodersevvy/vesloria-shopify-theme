@@ -1,0 +1,121 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "menu": "Menu",
+      "open_bag": "Open shopping bag",
+      "close_bag": "Close shopping bag",
+      "unit_price_separator": "per"
+    },
+    "breadcrumbs": {
+      "home": "HOME",
+      "collections": "COLLECTIONS",
+      "shop_all": "ALL FORMULATIONS"
+    },
+    "search": {
+      "placeholder": "Search formulations…",
+      "reset": "RESET",
+      "submit": "SEARCH",
+      "title": "SEARCH FORMULATIONS.",
+      "results_count": "{{ count }} FORMULATIONS FOUND",
+      "no_results": "No formulations match your search."
+    },
+    "pagination": {
+      "previous": "PREVIOUS",
+      "next": "NEXT",
+      "page": "Page {{ number }}"
+    },
+    "password_page": {
+      "eyebrow": "VESLORIA MAISON · PRIVATE PREVIEW",
+      "heading": "EQUILIBRIUM, CONSIDERED.",
+      "login_form_heading": "Enter flagship using store password:",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Enter store password",
+      "login_form_submit": "ENTER FLAGSHIP",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\">Log in here</a>"
+    },
+    "404": {
+      "eyebrow": "404 · PAGE NOT FOUND",
+      "heading": "RETURN TO EQUILIBRIUM.",
+      "subtext": "The page or formulation you requested could not be located.",
+      "cta": "EXPLORE ALL FORMULATIONS"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "MENU",
+      "close": "CLOSE",
+      "bag": "BAG",
+      "account": "ACCOUNT",
+      "shop": "SHOP",
+      "collections": "COLLECTIONS",
+      "ritual_guide": "RITUAL GUIDE",
+      "about": "ABOUT"
+    },
+    "cart": {
+      "title": "YOUR BAG.",
+      "drawer_title": "SHOPPING BAG",
+      "vessels_selected": "{{ count }} VESSELS SELECTED",
+      "vessel_selected": "01 VESSEL SELECTED",
+      "empty_title": "Your bag is currently empty.",
+      "empty_copy": "Explore our daily Core Ritual staples and numbered Reserve formulations.",
+      "continue_shopping": "CONTINUE EXPLORING FORMULATIONS →",
+      "remove": "REMOVE",
+      "qty_decrease": "Decrease quantity",
+      "qty_increase": "Increase quantity",
+      "subtotal": "SUBTOTAL",
+      "packaging_label": "PROTECTIVE GLASS PACKAGING",
+      "packaging_value": "Complimentary",
+      "shipping_label": "SHIPPING & TAXES",
+      "shipping_value": "Calculated at checkout",
+      "estimated_total": "ESTIMATED TOTAL",
+      "checkout": "PROCEED TO CHECKOUT",
+      "view_bag": "VIEW FULL BAG →",
+      "trust_note": "Climate-controlled dispatch in recyclable moulded-pulp cradles. Encrypted PCI-DSS checkout.",
+      "packaging_note_title": "COMPLIMENTARY ARCHITECTURAL PACKAGING",
+      "packaging_note_body": "Every VESLORIA dispatch includes custom moulded-pulp vessel protection and our A6 cotton-blend Daily Cadence ritual card.",
+      "step_bag": "01 / BAG",
+      "step_shipping": "02 / SHIPPING & CHECKOUT",
+      "step_payment": "03 / PAYMENT & BILLING"
+    },
+    "collection": {
+      "all_formulations": "ALL FORMULATIONS",
+      "empty": "No formulations match your current filter.",
+      "empty_hint": "Reset filters above to view all formulations.",
+      "formulations_count": "{{ count }} FORMULATIONS"
+    },
+    "product": {
+      "add_to_bag": "ADD TO BAG",
+      "adding": "ADDING TO BAG…",
+      "added": "ADDED TO BAG ✓",
+      "sold_out": "BATCH ARCHIVED",
+      "unavailable": "UNAVAILABLE",
+      "ritual_guide_link": "RITUAL & LAYERING GUIDE →",
+      "previous_formulation": "← PREVIOUS: {{ title }}",
+      "next_formulation": "{{ title }} →",
+      "complete_ritual": "COMPLETE THE RITUAL"
+    },
+    "newsletter": {
+      "email_label": "EMAIL ADDRESS",
+      "email_placeholder": "your@email.com",
+      "submit": "SUBSCRIBE",
+      "sending": "SENDING…",
+      "success": "RECEIVED ✓",
+      "error": "Please enter a valid email address."
+    },
+    "contact": {
+      "full_name": "FULL NAME",
+      "full_name_placeholder": "Your name",
+      "email": "EMAIL ADDRESS",
+      "email_placeholder": "your@email.com",
+      "enquiry_type": "ENQUIRY TYPE",
+      "order_ref": "ORDER REFERENCE (OPTIONAL)",
+      "order_ref_placeholder": "e.g., VSL-1042",
+      "message": "MESSAGE",
+      "message_placeholder": "How may our Client Care team assist you?",
+      "submit": "SEND MESSAGE",
+      "success": "RECEIVED ✓ — Our Client Care team has logged your correspondence."
+    }
+  }
+}

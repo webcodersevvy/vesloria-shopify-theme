@@ -1,0 +1,107 @@
+<section class="vsl-section color-{{ section.settings.color_scheme }}{% if section.settings.show_top_border %} vsl-section--border-top{% endif %}">
+  <div class="vsl-container">
+    <div class="vsl-manifesto{% if section.settings.boxed %} vsl-manifesto--box color-{{ section.settings.box_color_scheme }}{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="vsl-mono vsl-text-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="vsl-h1 vsl-manifesto__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="vsl-body-lg vsl-text-muted vsl-manifesto__body">{{ section.settings.body | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.link_label != blank -%}
+        {%- if section.settings.cta_style == 'button' -%}
+          {% render 'vesloria-button',
+            label: section.settings.link_label,
+            url: section.settings.link_url,
+            style: 'primary'
+          %}
+        {%- else -%}
+          <a href="{{ section.settings.link_url | default: '/pages/about' }}" class="vsl-editorial-link">
+            {{ section.settings.link_label | escape }}
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Maison Manifesto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE MAISON"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Headline",
+      "default": "QUIET STEWARDSHIP FOR SKIN."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "We believe skincare should restore calm to both skin and shelf. Our work balances biological literacy with physical tactility — creating vessels meant to be lived with and formulas meant to be trusted daily."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Action label",
+      "default": "READ OUR PHILOSOPHY →"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Action link"
+    },
+    {
+      "type": "select",
+      "id": "cta_style",
+      "label": "Action presentation",
+      "options": [
+        { "value": "link", "label": "Editorial underlined link" },
+        { "value": "button", "label": "Primary solid button" }
+      ],
+      "default": "link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": "Show top hairline rule",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "boxed",
+      "label": "Render inside surface box",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Section color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "box_color_scheme",
+      "label": "Box color scheme",
+      "default": "scheme-2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Maison Manifesto"
+    }
+  ]
+}
+{% endschema %}

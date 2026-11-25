@@ -1,0 +1,165 @@
+<section class="vsl-section--compact color-{{ section.settings.color_scheme }}">
+  <div class="vsl-container">
+    <div class="vsl-checkout-steps" aria-label="Checkout sequence">
+      <span class="vsl-mono-xs vsl-text-ink">{{ 'sections.cart.step_bag' | t }}</span>
+      <span class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.cart.step_shipping' | t }}</span>
+      <span class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.cart.step_payment' | t }}</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <p class="vsl-mono vsl-text-eyebrow">
+        SHOPPING BAG &nbsp;·&nbsp;
+        {%- if cart.item_count == 1 -%}
+          {{ 'sections.cart.vessel_selected' | t }}
+        {%- else -%}
+          {{ 'sections.cart.vessels_selected' | t: count: cart.item_count }}
+        {%- endif -%}
+      </p>
+      <h1 class="vsl-h1">{{ 'sections.cart.title' | t }}</h1>
+    </div>
+
+    {%- if cart.empty? -%}
+      <div class="vsl-empty-box" style="margin-top: 36px;">
+        <h2 class="vsl-h3">{{ 'sections.cart.empty_title' | t }}</h2>
+        <p class="vsl-body-sm vsl-text-muted">{{ 'sections.cart.empty_copy' | t }}</p>
+        <div style="margin-top: 8px;">
+          {% render 'vesloria-button',
+            label: 'EXPLORE FORMULATIONS',
+            url: routes.all_products_collection_url,
+            style: 'primary'
+          %}
+        </div>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" id="VesloriaCartForm" class="vsl-bag-split">
+        <div>
+          <div class="vsl-bag-items">
+            {%- for item in cart.items -%}
+              <div class="vsl-bag-item">
+                <a href="{{ item.url }}" class="vsl-bag-item__media">
+                  {%- if item.image != blank -%}
+                    {{
+                      item.image
+                      | image_url: width: 320
+                      | image_tag:
+                        widths: '160, 320',
+                        sizes: '108px',
+                        loading: 'lazy',
+                        alt: item.title | escape
+                    }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  {%- endif -%}
+                </a>
+
+                <div class="vsl-bag-item__body">
+                  <div class="vsl-bag-item__top">
+                    <a href="{{ item.url }}" class="vsl-h3">{{ item.product.title | escape }}</a>
+                    <span class="vsl-body-sm" style="font-weight: 500;">{{ item.final_line_price | money_with_currency }}</span>
+                  </div>
+
+                  {%- assign step_meta = item.product.metafields.custom.step_or_batch.value -%}
+                  {%- if item.sku != blank or step_meta != blank -%}
+                    <p class="vsl-mono-xs vsl-text-eyebrow">
+                      {{ item.sku | default: item.product.type | escape }}{% if step_meta != blank %} &nbsp;·&nbsp; {{ step_meta | escape }}{% endif %}
+                    </p>
+                  {%- endif -%}
+
+                  {%- unless item.product.has_only_default_variant -%}
+                    <p class="vsl-body-sm vsl-text-muted">{{ item.variant.title | escape }}</p>
+                  {%- endunless -%}
+
+                  <div style="display: flex; align-items: center; gap: 20px; margin-top: 8px;">
+                    <div class="vsl-qty-stepper">
+                      <a
+                        href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}"
+                        class="vsl-qty-btn"
+                        style="display:flex;align-items:center;justify-content:center;"
+                        aria-label="{{ 'sections.cart.qty_decrease' | t }}"
+                      >−</a>
+                      <span class="vsl-qty-val">{{ item.quantity }}</span>
+                      <a
+                        href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}"
+                        class="vsl-qty-btn"
+                        style="display:flex;align-items:center;justify-content:center;"
+                        aria-label="{{ 'sections.cart.qty_increase' | t }}"
+                      >+</a>
+                    </div>
+                    <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity=0" class="vsl-remove-link vsl-mono-xs">
+                      {{ 'sections.cart.remove' | t }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div style="padding-block: 24px; display: flex; flex-direction: column; gap: 6px;">
+            <p class="vsl-mono-xs vsl-text-eyebrow">{{ settings.packaging_note_title | escape }}</p>
+            <p class="vsl-body-sm vsl-text-muted">{{ settings.packaging_note_body | escape }}</p>
+          </div>
+        </div>
+
+        <aside class="vsl-order-summary" aria-label="Order summary">
+          <p class="vsl-mono vsl-text-eyebrow">ORDER SUMMARY</p>
+
+          <div style="border-top: 1px solid var(--color-mineral-mist); border-bottom: 1px solid var(--color-mineral-mist); padding-block: 16px; display: flex; flex-direction: column; gap: 14px;">
+            {%- for item in cart.items -%}
+              <div class="vsl-summary-row">
+                <div>
+                  <p class="vsl-h3" style="font-size: 16px;">{{ item.product.title | escape }}</p>
+                  <p class="vsl-mono-xs vsl-text-eyebrow">
+                    {% unless item.product.has_only_default_variant %}{{ item.variant.title | escape }} · {% endunless %}Qty {{ item.quantity }}
+                  </p>
+                </div>
+                <span class="vsl-body-sm">{{ item.final_line_price | money_with_currency }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="vsl-summary-row">
+            <span class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.cart.subtotal' | t }}</span>
+            <span class="vsl-body-sm">{{ cart.total_price | money_with_currency }}</span>
+          </div>
+          <div class="vsl-summary-row">
+            <span class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.cart.packaging_label' | t }}</span>
+            <span class="vsl-body-sm">{{ 'sections.cart.packaging_value' | t }}</span>
+          </div>
+          <div class="vsl-summary-row">
+            <span class="vsl-mono-xs vsl-text-eyebrow">{{ 'sections.cart.shipping_label' | t }}</span>
+            <span class="vsl-body-sm">{{ 'sections.cart.shipping_value' | t }}</span>
+          </div>
+
+          <div class="vsl-summary-total">
+            <span class="vsl-mono-xs vsl-text-ink">{{ 'sections.cart.estimated_total' | t }}</span>
+            <span class="vsl-h3">{{ cart.total_price | money_with_currency }}</span>
+          </div>
+
+          <button type="submit" name="checkout" class="vsl-btn vsl-btn--primary vsl-btn--full">
+            <span>{{ 'sections.cart.checkout' | t }}</span>
+          </button>
+
+          <a href="{{ routes.all_products_collection_url }}" class="vsl-editorial-link" style="text-align: center;">
+            {{ 'sections.cart.continue_shopping' | t }}
+          </a>
+
+          <p class="vsl-caption vsl-text-eyebrow">{{ settings.trust_note | escape }}</p>
+        </aside>
+      </form>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Shopping Bag",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}
